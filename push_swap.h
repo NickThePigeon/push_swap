@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:37:00 by nicky         #+#    #+#                 */
-/*   Updated: 2021/10/07 20:48:56 by nicky         ########   odam.nl         */
+/*   Updated: 2021/10/16 17:47:53 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef	struct	s_stack
 {
-	int	num_stack[1024];
+	int	*num_stack;
 	int top;
 }	t_stack;
 

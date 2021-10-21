@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:36:44 by nicky         #+#    #+#                 */
-/*   Updated: 2021/10/07 20:45:40 by nicky         ########   odam.nl         */
+/*   Updated: 2021/10/20 19:39:22 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	check_doubles(t_stack *stack)
 		j = 0;
 		i++;
 	}
-	write(1, "gelukt\n", 7);
 	return (0);
 }
 
@@ -102,9 +101,9 @@ int	push(t_stack *stack_from, t_stack *stack_to)
 	return (0);
 }
 
-int	push_a(t_stack *stack_a, t_stack *stack_b)
+int	push_to_a(t_stack *stack_a, t_stack *stack_b)
 {
-	if (push(stack_a, stack_b) == 1)
+	if (push(stack_b, stack_a) == 1)
 	{
 		write(1, "pa\n", 3);
 		return (1);
@@ -113,9 +112,9 @@ int	push_a(t_stack *stack_a, t_stack *stack_b)
 		return (0);
 }
 
-int	push_b(t_stack *stack_b, t_stack *stack_a)
+int	push_to_b(t_stack *stack_a, t_stack *stack_b)
 {
-	if (push(stack_b, stack_a) == 1)
+	if (push(stack_a, stack_b) == 1)
 	{
 		write(1, "pb\n", 3);
 		return (1);
@@ -204,6 +203,26 @@ int	rotate(t_stack *stack)
 	return (0);
 }
 
+// int	r_rotate(t_stack *stack)
+// {
+// 	int	holder;
+// 	int i;
+
+// 	i = stack->top;
+// 	if (stack->top > 0)
+// 	{
+// 		holder = stack->num_stack[stack->top];
+// 		while (i > 0)
+// 		{
+// 			stack->num_stack[i] = stack->num_stack[i - 1];
+// 			i--;
+// 		}
+// 		stack->num_stack[0] = holder;
+// 		return (1);
+// 	}
+// 	return (0);
+// }
+
 int	rotate_a(t_stack *stack_a)
 {
 	if (rotate(stack_a) == 1)
@@ -265,8 +284,6 @@ int	get_arguments(char **args, t_stack *stack)
 		}
 		j = 0;
 		stack->num_stack[stack->top] = ft_atoi(args[i]);
-		// if (!stack->num_stack[stack->top])
-		// 	exit(0);
 		i++;
 	}
 	return (0);
@@ -278,7 +295,6 @@ int	is_sorted(t_stack *stack_a)
 	int holder;
 
 	i = 0;
-	holder = 0;
 	while (i <= stack_a->top)
 	{
 		if (stack_a->num_stack[i] > holder)
@@ -289,25 +305,42 @@ int	is_sorted(t_stack *stack_a)
 		else
 			return (0);
 	}
+	printf("sorted\n");
 	return (1);
 }
 
-// int	sort(t_stack *stack_a, t_stack *stack_b)
-// {	
-// 	if (stack_b->top < 2)
-// 	{
-// 		push(stack_a, stack_b);
-// 		push(stack_a, stack_b);
-// 	}
-// 	while (!is_sorted(stack_a))
-// 	{	
-// 		if (stack_b->num_stack[stack_b->top])
-// 	}
-// }
+int	is_empty(t_stack *stack)
+{	
+	if (stack->top == -1)
+		return (1);
+	return (0);
+}
 
-int	sort(t_stack *stack_a, t_stack *stack_b)
+void	sort(t_stack *stack_a, t_stack *stack_b)
 {
+	int size;
+	int num;
+	int i;
+	int j;
 	
+	i = 0;
+	size = stack_a->top;
+	while (i < size)
+	{
+		j = 0;
+    	while(j < size)
+    	{
+        	num = stack_a->num_stack[stack_a->top];
+        	if (((num >> i)&1) == 1)
+				r_rotate_a(stack_a);
+        	else
+				push_to_b(stack_a, stack_b);
+			j++;
+    	}
+    	while (!is_empty(stack_b))
+			push_to_a(stack_a, stack_b);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -317,19 +350,27 @@ int	main(int argc, char **argv)
 	
 	stack_a.top = -1;
 	stack_b.top = -1;
+	
+	stack_a.num_stack = (int *)malloc((argc - 1) * sizeof(int)); 
+	stack_b.num_stack = (int *)malloc((argc - 1) * sizeof(int));
 	if (argc > 1)
 	{
 		get_arguments(argv, &stack_a);
 		check_doubles(&stack_a);
-		for (int i = 0; i <= stack_a.top; i++)
-		{
-			printf("%d\n", stack_a.num_stack[i]);
-		}
-		printf("\n");
 		// for (int i = 0; i <= stack_b.top; i++)
 		// {
 		// 	printf("%d\n", stack_b.num_stack[i]);
 		// }
+		sort(&stack_a, &stack_b);
+		// r_rotate_a(&stack_a);
+		// rotate_a(&stack_a);
+		// r_rotate_a(&stack_a);
+		// rotate_a(&stack_a);
+		printf("\n");
+		for (int i = 0; i <= stack_a.top; i++)
+		{
+			printf("%d\n", stack_a.num_stack[i]);
+		}
 	}
 	else
 		return (-1);

@@ -4,7 +4,7 @@ SRCS = 			push_swap.c \
 OBJS			= $(SRCS:.c=.o)
 
 HEADER_FILE		= push_swap.h
-CFLAGS			= -O3 -Wall -Wextra -Werror -g
+CFLAGS			= -O3 -Wall -Wextra -Werror
 LIBFT			= libft/libft.a
 CC				= gcc
 
