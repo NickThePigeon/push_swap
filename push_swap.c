@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:36:44 by nicky         #+#    #+#                 */
-/*   Updated: 2021/10/20 19:39:22 by nicky         ########   odam.nl         */
+/*   Updated: 2021/10/22 12:44:04 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_doubles(t_stack *stack)
 		{
 			if (holder == stack->num_stack[j] && j != i)
 			{
-				write(1, "dubbel\n", 7);
+				// write(1, "dubbel\n", 7);
 				exit(0);
 			}
 			j++;
@@ -203,26 +203,6 @@ int	rotate(t_stack *stack)
 	return (0);
 }
 
-// int	r_rotate(t_stack *stack)
-// {
-// 	int	holder;
-// 	int i;
-
-// 	i = stack->top;
-// 	if (stack->top > 0)
-// 	{
-// 		holder = stack->num_stack[stack->top];
-// 		while (i > 0)
-// 		{
-// 			stack->num_stack[i] = stack->num_stack[i - 1];
-// 			i--;
-// 		}
-// 		stack->num_stack[0] = holder;
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
 int	rotate_a(t_stack *stack_a)
 {
 	if (rotate(stack_a) == 1)
@@ -294,6 +274,7 @@ int	is_sorted(t_stack *stack_a)
 	int i;
 	int holder;
 
+	holder = -1;
 	i = 0;
 	while (i <= stack_a->top)
 	{
@@ -325,13 +306,13 @@ void	sort(t_stack *stack_a, t_stack *stack_b)
 	
 	i = 0;
 	size = stack_a->top;
-	while (i < size)
+	while (i <= size)
 	{
 		j = 0;
-    	while(j < size)
+    	while(j <= size)
     	{
         	num = stack_a->num_stack[stack_a->top];
-        	if (((num >> i)&1) == 1)
+        	if (((num >> i)&1) == 0)
 				r_rotate_a(stack_a);
         	else
 				push_to_b(stack_a, stack_b);
@@ -343,33 +324,38 @@ void	sort(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
+t_stack		copy_stack(t_stack *stack_a)
+{
+	
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack stack_a;
 	t_stack stack_b;
+	t_stack copy_a;
 	
 	stack_a.top = -1;
 	stack_b.top = -1;
+	copy_a.top = -1;
 	
 	stack_a.num_stack = (int *)malloc((argc - 1) * sizeof(int)); 
 	stack_b.num_stack = (int *)malloc((argc - 1) * sizeof(int));
+	copy_a.num_stack = (int *)malloc((argc - 1) * sizeof(int));
+
 	if (argc > 1)
 	{
 		get_arguments(argv, &stack_a);
 		check_doubles(&stack_a);
-		// for (int i = 0; i <= stack_b.top; i++)
-		// {
-		// 	printf("%d\n", stack_b.num_stack[i]);
-		// }
 		sort(&stack_a, &stack_b);
-		// r_rotate_a(&stack_a);
-		// rotate_a(&stack_a);
-		// r_rotate_a(&stack_a);
-		// rotate_a(&stack_a);
-		printf("\n");
-		for (int i = 0; i <= stack_a.top; i++)
+		
+		// printf("\n");
+		int i;
+		i = 0;
+		while (i <= stack_a.top)
 		{
 			printf("%d\n", stack_a.num_stack[i]);
+			i++;
 		}
 	}
 	else
