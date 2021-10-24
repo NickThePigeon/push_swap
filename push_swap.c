@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:36:44 by nicky         #+#    #+#                 */
-/*   Updated: 2021/10/22 12:44:04 by nduijf        ########   odam.nl         */
+/*   Updated: 2021/10/24 14:36:29 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,6 +297,16 @@ int	is_empty(t_stack *stack)
 	return (0);
 }
 
+int	get_place_most_significant_set_bit(int x)
+{
+	int	bits;
+
+	bits = 0;
+	while (x >> bits != 0)
+		bits++;
+	return (bits);
+}
+
 void	sort(t_stack *stack_a, t_stack *stack_b)
 {
 	int size;
@@ -306,13 +316,14 @@ void	sort(t_stack *stack_a, t_stack *stack_b)
 	
 	i = 0;
 	size = stack_a->top;
-	while (i <= size)
+	int most_sig_bit = get_place_most_significant_set_bit(stack_a->top);
+	while (i < most_sig_bit)
 	{
 		j = 0;
-    	while(j <= size)
+    	while(j < size)
     	{
         	num = stack_a->num_stack[stack_a->top];
-        	if (((num >> i)&1) == 0)
+        	if (((num >> i)&1) == 1)
 				r_rotate_a(stack_a);
         	else
 				push_to_b(stack_a, stack_b);
@@ -324,9 +335,42 @@ void	sort(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-t_stack		copy_stack(t_stack *stack_a)
+#include <limits.h>
+
+t_stack		copy_and_enum(t_stack *stack)
 {
-	
+	t_stack copy;
+	int i;
+	int j;
+	int k;
+	int holder;
+	int prev_holder;
+
+	copy.num_stack = (int *)malloc(sizeof(int) * stack->top + 1);
+	if (copy.num_stack == NULL)
+		exit(0);
+	holder = INT_MAX;
+	prev_holder = INT_MIN;
+	i = 0;
+	while (i <= stack->top)
+	{
+		k = 0;
+		while (k <= stack->top)
+		{
+			if (stack->num_stack[k] < holder && stack->num_stack[k] > prev_holder)
+			{
+				holder = stack->num_stack[k];
+				j = k;
+			}
+			k++;
+		}
+		prev_holder = holder;
+		holder = INT_MAX;
+		copy.num_stack[j] = i;
+		i++;
+	}
+	copy.top = stack->top;
+	return (copy);
 }
 
 int	main(int argc, char **argv)
@@ -337,26 +381,31 @@ int	main(int argc, char **argv)
 	
 	stack_a.top = -1;
 	stack_b.top = -1;
-	copy_a.top = -1;
 	
 	stack_a.num_stack = (int *)malloc((argc - 1) * sizeof(int)); 
 	stack_b.num_stack = (int *)malloc((argc - 1) * sizeof(int));
-	copy_a.num_stack = (int *)malloc((argc - 1) * sizeof(int));
 
 	if (argc > 1)
 	{
 		get_arguments(argv, &stack_a);
 		check_doubles(&stack_a);
-		sort(&stack_a, &stack_b);
-		
+		copy_a = copy_and_enum(&stack_a);
+		sort(&copy_a, &stack_b);
 		// printf("\n");
-		int i;
-		i = 0;
-		while (i <= stack_a.top)
-		{
-			printf("%d\n", stack_a.num_stack[i]);
-			i++;
-		}
+		// i = 0;
+		// while (i <= stack_a.top)
+		// {
+		// 	printf("%d\n", stack_a.num_stack[i]);
+		// 	i++;
+		// }
+		// printf("\n\n");
+		// int i;
+		// i = 0;
+		// while (i <= stack_a.top)
+		// {
+		// 	printf("%d\n", copy_a.num_stack[i]);
+		// 	i++;
+		// }
 	}
 	else
 		return (-1);
