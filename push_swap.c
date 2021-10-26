@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:36:44 by nicky         #+#    #+#                 */
-/*   Updated: 2021/10/24 14:36:29 by nduijf        ########   odam.nl         */
+/*   Updated: 2021/10/26 14:50:00 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,10 +320,10 @@ void	sort(t_stack *stack_a, t_stack *stack_b)
 	while (i < most_sig_bit)
 	{
 		j = 0;
-    	while(j < size)
+    	while(j <= size)
     	{
         	num = stack_a->num_stack[stack_a->top];
-        	if (((num >> i)&1) == 1)
+        	if (((num >> i)&1) == 0)
 				r_rotate_a(stack_a);
         	else
 				push_to_b(stack_a, stack_b);
@@ -357,7 +357,7 @@ t_stack		copy_and_enum(t_stack *stack)
 		k = 0;
 		while (k <= stack->top)
 		{
-			if (stack->num_stack[k] < holder && stack->num_stack[k] > prev_holder)
+			if ((stack->num_stack[k] < holder && stack->num_stack[k] > prev_holder) || (stack->num_stack[k] < holder && i == 0) || (stack->num_stack[k] == INT_MAX && i == stack->top))
 			{
 				holder = stack->num_stack[k];
 				j = k;
@@ -371,6 +371,17 @@ t_stack		copy_and_enum(t_stack *stack)
 	}
 	copy.top = stack->top;
 	return (copy);
+}
+
+void	print_stack(t_stack *stack)
+{
+	int i;
+	i = 0;
+	while (i <= stack->top)
+	{
+		printf("%d\n", stack->num_stack[i]);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -391,21 +402,8 @@ int	main(int argc, char **argv)
 		check_doubles(&stack_a);
 		copy_a = copy_and_enum(&stack_a);
 		sort(&copy_a, &stack_b);
-		// printf("\n");
-		// i = 0;
-		// while (i <= stack_a.top)
-		// {
-		// 	printf("%d\n", stack_a.num_stack[i]);
-		// 	i++;
-		// }
-		// printf("\n\n");
-		// int i;
-		// i = 0;
-		// while (i <= stack_a.top)
-		// {
-		// 	printf("%d\n", copy_a.num_stack[i]);
-		// 	i++;
-		// }
+		// print_stack(&stack_a);
+		// print_stack(&copy_a);
 	}
 	else
 		return (-1);
