@@ -6,7 +6,7 @@
 /*   By: nduijf <nduijf@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/01 18:22:31 by nduijf        #+#    #+#                 */
-/*   Updated: 2021/11/02 00:10:20 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/02 00:22:00 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_close(error_msg message, int err, t_all *all)
 {
 	print_error(message);
 	free_stack_array(all, err);
-	err = 0;
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:37:00 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/02 00:06:49 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/02 00:27:28 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,12 @@ int	r_rotate(t_stack *stack);
 
 int	check_doubles(t_stack *stack);
 int	get_arguments(char **args, int argc, t_stack *stack);
+int	check_overflow(char **argv, t_stack *stack);
+
 int	is_empty(t_stack *stack);
 int	is_sorted(t_stack *stack);
 void	print_stack(t_stack *stack);
+
 void	initialize(int argc, char **argv);
 t_stack		copy_and_enum(t_stack *stack_a, t_stack *sorted_a, t_all *all);
 void	init_stacks(t_stack *stack_a, t_stack *stack_b, int len, t_all *all);
