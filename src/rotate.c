@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:05:10 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 17:09:55 by nduijf        ########   odam.nl         */
+/*   Updated: 2021/11/02 00:34:31 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	rotate_b(t_stack *stack_b)
 		return (0);
 }
 
-int rotate_rr(t_stack *stack_a, t_stack *stack_b)
+int	rotate_rr(t_stack *stack_a, t_stack *stack_b)
 {
-	int err;
+	int	err;
 
 	err = 0;
 	if (stack_a->top > 1 && stack_b->top > 1)
@@ -55,7 +55,7 @@ int rotate_rr(t_stack *stack_a, t_stack *stack_b)
 int	rotate(t_stack *stack)
 {
 	int	holder;
-	int i;
+	int	i;
 
 	if (stack->top > 1)
 	{

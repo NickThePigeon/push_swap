@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/01 22:24:39 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 22:25:25 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/02 00:35:21 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	is_sorted(t_stack *stack)
 {
-	int i;
-	int size;
+	int	i;
+	int	size;
 
 	size = stack->top - 1;
 	i = 0;
@@ -41,9 +41,9 @@ int	is_empty(t_stack *stack)
 
 void	print_stack(t_stack *stack)
 {
-	int i;
-	int size;
-	
+	int	i;
+	int	size;
+
 	size = stack->top;
 	i = 0;
 	while (size > 0)

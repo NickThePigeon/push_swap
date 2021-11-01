@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 00:25:16 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/02 00:26:04 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/02 00:29:26 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	check_doubles(t_stack *stack)
 {
-	int holder;
-	int i;
-	int j;
+	int	holder;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -37,8 +37,8 @@ int	check_doubles(t_stack *stack)
 
 int	get_arguments(char **args,	int argc, t_stack *stack)
 {
-	int len;
-	int j;
+	int	len;
+	int	j;
 
 	len = argc - 1;
 	j = 0;
@@ -63,10 +63,10 @@ int	get_arguments(char **args,	int argc, t_stack *stack)
 
 int	check_overflow(char **argv, t_stack *stack)
 {
-	char *ret_itoa;
-	int len;
-	int i;
-	
+	char	*ret_itoa;
+	int		len;
+	int		i;
+
 	len = stack->top - 1;
 	i = 1;
 	while (argv[i])

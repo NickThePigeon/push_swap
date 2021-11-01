@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:09:39 by nicky         #+#    #+#                 */
-/*   Updated: 2021/10/31 18:10:52 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/02 00:33:43 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	swap_b(t_stack *stack_b)
 
 int	swap_ss(t_stack *stack_a, t_stack *stack_b)
 {
-	int err;
+	int	err;
 
 	err = 0;
 	err += swap(stack_a);
@@ -51,8 +51,8 @@ int	swap_ss(t_stack *stack_a, t_stack *stack_b)
 
 int	swap(t_stack *stack)
 {
-	int holder;
-	
+	int	holder;
+
 	if (stack->top > 0)
 	{
 		holder = stack->num_stack[stack->top - 1];

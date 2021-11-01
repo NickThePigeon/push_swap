@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:03:48 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/02 00:25:54 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/02 00:33:01 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	pre_sort(t_all *all)
 
 void	initialize(int argc, char **argv)
 {
-	t_all all;
+	t_all	all;
 
 	init_stacks(&all.stack_a, &all.stack_b, (argc - 1), &all);
 	if (get_arguments(argv, argc, &all.stack_a) == 0)
@@ -56,6 +56,6 @@ void	initialize(int argc, char **argv)
 	init_and_sort_copy_stack(&all.copy_a, &all.stack_a, &all);
 	all.enum_a = copy_and_enum(&all.stack_a, &all.copy_a, &all);
 	pre_sort(&all);
-	// print_stack(&enum_a);
+		// print_stack(&enum_a);
 	ft_close(SUCCES, 99, &all);
 }
