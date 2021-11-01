@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:05:01 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 09:02:01 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/01 17:21:20 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ int	r_rotate(t_stack *stack)
 	int	holder;
 	int i;
 
-	i = 0;
 	if (stack->top > 1)
 	{
-		holder = stack->num_stack[stack->top - 1];
-		while (i > 0)
+		i = 0;
+		holder = stack->num_stack[0];
+		while (i < stack->top - 1)
 		{
-			stack->num_stack[i] = stack->num_stack[i - 1];
-			i--;
+			stack->num_stack[i] = stack->num_stack[i + 1];
+			i++;
 		}
-		stack->num_stack[0] = holder;
+		stack->num_stack[stack->top - 1] = holder;
 		return (1);
 	}
 	return (0);

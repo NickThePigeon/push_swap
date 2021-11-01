@@ -6,21 +6,26 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:36:44 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 09:07:29 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/01 18:08:33 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_stack *stack_a)
+int	is_sorted(t_stack *stack)
 {
 	int i;
+	int size;
 
+	size = stack->top - 1;
 	i = 0;
-	while (i < stack_a->top)
+	while (size > 0)
 	{
-		if (stack_a->num_stack[i] == i)
+		if (stack->num_stack[size] == i)
+		{
+			size--;
 			i++;
+		}
 		else
 			return (0);
 	}
@@ -37,45 +42,23 @@ int	is_empty(t_stack *stack)
 void	print_stack(t_stack *stack)
 {
 	int i;
+	int size;
+	
+	size = stack->top;
 	i = 0;
-	while (i < stack->top)
+	while (size > 0)
 	{
-		printf("%d ", stack->num_stack[i]);
-		i++;
+		printf("%d ", stack->num_stack[size - 1]);
+		size--;
 	}
 	printf("\n");
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack stack_a;
-	t_stack stack_b;
-	t_stack copy_a;
-	t_stack enum_a;
-	
-	stack_a.top = 0;
-	stack_b.top = 0;
-	
-	stack_a.num_stack = (int *)malloc((argc) * sizeof(int)); 
-	stack_b.num_stack = (int *)malloc((argc) * sizeof(int));
-
 	if (argc > 1)
 	{
-		get_arguments(argv, &stack_a);
-		check_doubles(&stack_a);
-		copy_a.num_stack = ft_intndup(stack_a.num_stack, stack_a.top);
-		copy_a.top = stack_a.top;
-		// print_stack(&copy_a);
-		bubble_sort(copy_a.num_stack, stack_a.top);
-		enum_a = copy_and_enum(&stack_a, &copy_a);
-		// printf("\n");
-		sort(&enum_a, &stack_b);
-		// r_rotate_a(&copy_a);
-		// print_stack(&enum_a);
-		free(stack_a.num_stack);
-		free(stack_b.num_stack);
-		free(copy_a.num_stack);
-		free(enum_a.num_stack);
+		init(argc, argv);
 	}
 	else
 		return (-1);

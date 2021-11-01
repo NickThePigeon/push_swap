@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:09:51 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 09:05:58 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/01 15:54:23 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,3 @@ int	push(t_stack *stack_from, t_stack *stack_to)
 	}
 	return (0);
 }
-// int	push(t_stack *stack_from, t_stack *stack_to)
-// {
-// 	if (stack_from->top > 0)
-// 	{
-// 		stack_to->top++;
-// 		stack_to->num_stack[stack_to->top - 1] = stack_from->num_stack[stack_from->top - 1];
-// 		stack_from->top--;
-// 		return (1);
-// 	}
-// 	return (0);
-// }

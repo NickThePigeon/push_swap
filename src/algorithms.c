@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:01:54 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 08:54:52 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/01 17:21:30 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ void	sort(t_stack *stack_a, t_stack *stack_b)
 	
 	i = 0;
 	size = stack_a->top;
-	int most_sig_bit = get_place_most_significant_set_bit(stack_a->top);
-	while (i < most_sig_bit)
+	while (!is_sorted(stack_a))
 	{
 		j = 0;
     	while(j < size)
