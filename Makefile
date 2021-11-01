@@ -1,10 +1,17 @@
 NAME =			push_swap
-SRCS = 			push_swap.c \
+SRCS = 			src/push_swap.c \
+				src/parse.c		\
+				src/push.c		\
+				src/swap.c		\
+				src/r_rotate.c	\
+				src/rotate.c	\
+				src/algorithms.c	\
+
 
 OBJS			= $(SRCS:.c=.o)
 
 HEADER_FILE		= push_swap.h
-CFLAGS			= -O3 -Wall -Wextra -Werror
+CFLAGS			= -O3 -Wall -Wextra -Werror -I.
 LIBFT			= libft/libft.a
 CC				= gcc
 
