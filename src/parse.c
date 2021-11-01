@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:03:48 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 19:26:42 by nduijf        ########   odam.nl         */
+/*   Updated: 2021/11/01 23:25:09 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,13 @@ int	check_doubles(t_stack *stack)
 		while (j < stack->top)
 		{
 			if (holder == stack->num_stack[j] && j != i)
-			{
-				exit(0);/* proper exit here! */
-			}
+				return (0);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 int	get_arguments(char **args,	int argc, t_stack *stack)
@@ -53,7 +51,7 @@ int	get_arguments(char **args,	int argc, t_stack *stack)
 			else if (ft_isdigit(args[len][j]))
 				j++;
 			else
-				exit(0);/* proper exit here */
+				return (0);
 		}
 		j = 0;
 		stack->num_stack[stack->top] = ft_atoi(args[len]);
@@ -61,6 +59,21 @@ int	get_arguments(char **args,	int argc, t_stack *stack)
 		len--;
 	}
 	return (0);
+}
+
+void	init_stacks(t_stack *stack_a, t_stack *stack_b, int len)
+{
+	stack_a->top = 0;
+	stack_b->top = 0;
+	stack_a->num_stack = (int *)malloc((len) * sizeof(int));
+	if (!stack_a->num_stack)
+		ft_close(MALLOC_FAILED, 3);
+	stack_b->num_stack = (int *)malloc((len) * sizeof(int));
+	if (!stack_b->num_stack)
+	{
+		free(stack_a->num_stack);
+		ft_close(MALLOC_FAILED, 3);
+	}
 }
 
 int	check_overflow(char **argv, t_stack *stack)
@@ -75,11 +88,7 @@ int	check_overflow(char **argv, t_stack *stack)
 	{
 		ret_itoa = ft_itoa(stack->num_stack[len]);
 		if (ft_strncmp(argv[i], ret_itoa, ft_strlen(argv[i])))
-		{
-			printf("Overflow!");
-			/* proper exit here! */
-			exit(0);
-		}
+			return (0);
 		if (ret_itoa)
 			free(ret_itoa);
 		i++;
@@ -88,37 +97,57 @@ int	check_overflow(char **argv, t_stack *stack)
 	return (1);
 }
 
-void	init_and_sort_copy_stack(t_stack *copy_a, t_stack *stack_a)
+int	init_and_sort_copy_stack(t_stack *copy_a, t_stack *stack_a)
 {
 	copy_a->num_stack = ft_intndup(stack_a->num_stack, stack_a->top);
+	if (!copy_a->num_stack)
+		return (0);
 	copy_a->top = stack_a->top;
-	bubble_sort(copy_a->num_stack, stack_a->top);	
+	bubble_sort(copy_a->num_stack, stack_a->top);
+	return (1);
 }
 
-void	init(int argc, char **argv)
+void	initialize_two(t_stack *stack_a, t_stack *stack_b, t_stack *copy_a, t_stack *enum_a)
+{
+	if (init_and_sort_copy_stack(copy_a, stack_a) == 0)
+	{
+		free_stack_array(stack_a, stack_b, copy_a, enum_a);
+		ft_close(MALLOC_FAILED, 6);
+	}
+	enum_a = copy_and_enum(stack_a, copy_a);
+	if (!enum_a)
+	{
+		free_stack_array(stack_a, stack_b, copy_a, enum_a);
+		ft_close(MALLOC_FAILED, 7);
+	}
+}
+
+void	initialize(int argc, char **argv)
 {
 	t_stack stack_a;
 	t_stack stack_b;
 	t_stack copy_a;
 	t_stack enum_a;
-	
-	stack_a.top = 0;
-	stack_b.top = 0;
-	stack_a.num_stack = (int *)malloc((argc - 1) * sizeof(int)); 
-	stack_b.num_stack = (int *)malloc((argc - 1) * sizeof(int));
-	
-	get_arguments(argv, argc, &stack_a);
-	check_overflow(argv, &stack_a);
-	check_doubles(&stack_a);
-	init_and_sort_copy_stack(&copy_a, &stack_a);
 
-	enum_a = copy_and_enum(&stack_a, &copy_a);
+	init_stacks(&stack_a, &stack_b, (argc - 1));
+	if (get_arguments(argv, argc, &stack_a) == 0)
+	{
+		free_stack_array(&stack_a, &stack_b, &copy_a, &enum_a);
+		ft_close(STACK_ALLOCATION_FAIL, 3);
+	}
+	if (check_overflow(argv, &stack_a) == 0)
+	{
+		free_stack_array(&stack_a, &stack_b, &copy_a, &enum_a);
+		ft_close(INTEGER_OVERFLOW, 4);
+	}
+	if (check_doubles(&stack_a) == 0)
+	{
+		free_stack_array(&stack_a, &stack_b, &copy_a, &enum_a);
+		ft_close(DOUBLE_INTEGER, 5);
+	}
+	initialize_two(&stack_a, &stack_b, &copy_a, &enum_a);
 
 	sort(&enum_a, &stack_b);
 	// print_stack(&enum_a);
-	free(copy_a.num_stack);
-	free(stack_a.num_stack);
-	free(stack_b.num_stack);
-	free(enum_a.num_stack);
-	system("leaks push_swap");
+	free_stack_array(&stack_a, &stack_b, &copy_a, &enum_a);
 }

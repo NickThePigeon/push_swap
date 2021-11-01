@@ -6,22 +6,12 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:01:54 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 17:21:30 by nduijf        ########   odam.nl         */
+/*   Updated: 2021/11/01 23:25:50 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
-
-int	get_place_most_significant_set_bit(int x)
-{
-	int	bits;
-
-	bits = 0;
-	while (x >> bits != 0)
-		bits++;
-	return (bits);
-}
 
 void	sort(t_stack *stack_a, t_stack *stack_b)
 {
@@ -58,7 +48,7 @@ t_stack		copy_and_enum(t_stack *stack_a, t_stack *sorted_a)
 
 	enum_a.num_stack = (int *)malloc(sizeof(int) * stack_a->top);
 	if (!enum_a.num_stack)
-		exit(0); /* proper exit program here */
+		return (NULL);
 	enum_a.top = stack_a->top;
 	i = 0;
 	while (i < stack_a->top)
@@ -75,7 +65,7 @@ t_stack		copy_and_enum(t_stack *stack_a, t_stack *sorted_a)
 		}
 		i++;
 	}
-	return (enum_a);
+	return (&enum_a);
 }
 
 void	swap_point(int *xp, int *yp)

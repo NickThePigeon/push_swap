@@ -6,6 +6,8 @@ SRCS = 			src/push_swap.c \
 				src/r_rotate.c	\
 				src/rotate.c	\
 				src/algorithms.c	\
+				src/utils.c		\
+				src/exit.c		\
 
 
 OBJS			= $(SRCS:.c=.o)
