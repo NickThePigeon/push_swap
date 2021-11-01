@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:03:48 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 23:25:09 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/02 00:09:11 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ int	get_arguments(char **args,	int argc, t_stack *stack)
 		stack->top++;
 		len--;
 	}
-	return (0);
+	return (1);
 }
 
-void	init_stacks(t_stack *stack_a, t_stack *stack_b, int len)
+void	init_stacks(t_stack *stack_a, t_stack *stack_b, int len, t_all *all)
 {
 	stack_a->top = 0;
 	stack_b->top = 0;
 	stack_a->num_stack = (int *)malloc((len) * sizeof(int));
 	if (!stack_a->num_stack)
-		ft_close(MALLOC_FAILED, 3);
+		ft_close(MALLOC_FAILED, 3, all);
 	stack_b->num_stack = (int *)malloc((len) * sizeof(int));
 	if (!stack_b->num_stack)
 	{
 		free(stack_a->num_stack);
-		ft_close(MALLOC_FAILED, 3);
+		ft_close(MALLOC_FAILED, 3, all);
 	}
 }
 
@@ -97,57 +97,35 @@ int	check_overflow(char **argv, t_stack *stack)
 	return (1);
 }
 
-int	init_and_sort_copy_stack(t_stack *copy_a, t_stack *stack_a)
+void	init_and_sort_copy_stack(t_stack *copy_a, t_stack *stack_a, t_all *all)
 {
 	copy_a->num_stack = ft_intndup(stack_a->num_stack, stack_a->top);
 	if (!copy_a->num_stack)
-		return (0);
+		ft_close(MALLOC_FAILED, 6, all);
 	copy_a->top = stack_a->top;
 	bubble_sort(copy_a->num_stack, stack_a->top);
-	return (1);
 }
 
-void	initialize_two(t_stack *stack_a, t_stack *stack_b, t_stack *copy_a, t_stack *enum_a)
+void	pre_sort(t_all *all)
 {
-	if (init_and_sort_copy_stack(copy_a, stack_a) == 0)
-	{
-		free_stack_array(stack_a, stack_b, copy_a, enum_a);
-		ft_close(MALLOC_FAILED, 6);
-	}
-	enum_a = copy_and_enum(stack_a, copy_a);
-	if (!enum_a)
-	{
-		free_stack_array(stack_a, stack_b, copy_a, enum_a);
-		ft_close(MALLOC_FAILED, 7);
-	}
+	if (all->stack_a.top > 4)
+		sort(&all->enum_a, &all->stack_b);
 }
 
 void	initialize(int argc, char **argv)
 {
-	t_stack stack_a;
-	t_stack stack_b;
-	t_stack copy_a;
-	t_stack enum_a;
+	t_all all;
 
-	init_stacks(&stack_a, &stack_b, (argc - 1));
-	if (get_arguments(argv, argc, &stack_a) == 0)
-	{
-		free_stack_array(&stack_a, &stack_b, &copy_a, &enum_a);
-		ft_close(STACK_ALLOCATION_FAIL, 3);
-	}
-	if (check_overflow(argv, &stack_a) == 0)
-	{
-		free_stack_array(&stack_a, &stack_b, &copy_a, &enum_a);
-		ft_close(INTEGER_OVERFLOW, 4);
-	}
-	if (check_doubles(&stack_a) == 0)
-	{
-		free_stack_array(&stack_a, &stack_b, &copy_a, &enum_a);
-		ft_close(DOUBLE_INTEGER, 5);
-	}
-	initialize_two(&stack_a, &stack_b, &copy_a, &enum_a);
-
-	sort(&enum_a, &stack_b);
+	init_stacks(&all.stack_a, &all.stack_b, (argc - 1), &all);
+	if (get_arguments(argv, argc, &all.stack_a) == 0)
+		ft_close(STACK_ALLOCATION_FAIL, 3, &all);
+	if (check_overflow(argv, &all.stack_a) == 0)
+		ft_close(INTEGER_OVERFLOW, 4, &all);
+	if (check_doubles(&all.stack_a) == 0)
+		ft_close(DOUBLE_INTEGER, 5, &all);
+	init_and_sort_copy_stack(&all.copy_a, &all.stack_a, &all);
+	all.enum_a = copy_and_enum(&all.stack_a, &all.copy_a, &all);
+	pre_sort(&all);
 	// print_stack(&enum_a);
-	free_stack_array(&stack_a, &stack_b, &copy_a, &enum_a);
+	ft_close(SUCCES, 99, &all);
 }

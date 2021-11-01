@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:37:00 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 23:27:28 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/02 00:06:49 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,16 @@ int	is_empty(t_stack *stack);
 int	is_sorted(t_stack *stack);
 void	print_stack(t_stack *stack);
 void	initialize(int argc, char **argv);
-t_stack		*copy_and_enum(t_stack *stack_a, t_stack *sorted_a);
+t_stack		copy_and_enum(t_stack *stack_a, t_stack *sorted_a, t_all *all);
+void	init_stacks(t_stack *stack_a, t_stack *stack_b, int len, t_all *all);
 
 void	bubble_sort(int *arr, int n);
 void	swap_point(int *xp, int *yp);
 void	sort(t_stack *stack_a, t_stack *stack_b);
+void	pre_sort(t_all *all);
 
-void	ft_close(error_msg message, int err);
+void	ft_close(error_msg message, int err, t_all *all);
 void	print_error(error_msg msg);
-void	free_stack_array(t_stack *stack_a, t_stack *stack_b, t_stack *copy_a, t_stack *enum_a);
+void	free_stack_array(t_all *all, int err);
 
 #endif

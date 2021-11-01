@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:01:54 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 23:25:50 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/01 23:48:39 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	sort(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-t_stack		copy_and_enum(t_stack *stack_a, t_stack *sorted_a)
+t_stack		copy_and_enum(t_stack *stack_a, t_stack *sorted_a, t_all *all)
 {
 	t_stack enum_a;
 	int	i;
@@ -48,7 +48,7 @@ t_stack		copy_and_enum(t_stack *stack_a, t_stack *sorted_a)
 
 	enum_a.num_stack = (int *)malloc(sizeof(int) * stack_a->top);
 	if (!enum_a.num_stack)
-		return (NULL);
+		ft_close(MALLOC_FAILED, 7, all);
 	enum_a.top = stack_a->top;
 	i = 0;
 	while (i < stack_a->top)
@@ -65,7 +65,7 @@ t_stack		copy_and_enum(t_stack *stack_a, t_stack *sorted_a)
 		}
 		i++;
 	}
-	return (&enum_a);
+	return (enum_a);
 }
 
 void	swap_point(int *xp, int *yp)
