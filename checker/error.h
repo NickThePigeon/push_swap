@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   error.h                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: nduijf <nduijf@student.codam.nl>             +#+                     */
+/*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/11/01 18:39:33 by nduijf        #+#    #+#                 */
-/*   Updated: 2021/11/02 13:56:28 by nicky         ########   odam.nl         */
+/*   Created: 2021/11/02 13:56:53 by nicky         #+#    #+#                 */
+/*   Updated: 2021/11/02 18:07:14 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 typedef enum
 {
-	DEBUG = 1,
 	MALLOC_FAILED,
 	STACK_ALLOCATION_FAIL,
 	INTEGER_OVERFLOW,
 	DOUBLE_INTEGER,
+	UNKOWN_EXCUTION_INPUT,
+	KO,
 	SUCCES,
 }	error_msg;
 

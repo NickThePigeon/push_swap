@@ -3,44 +3,36 @@
 /*                                                        ::::::::            */
 /*   exit.c                                             :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: nduijf <nduijf@student.codam.nl>             +#+                     */
+/*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/11/01 18:22:31 by nduijf        #+#    #+#                 */
-/*   Updated: 2021/11/02 10:18:39 by nicky         ########   odam.nl         */
+/*   Created: 2021/11/02 13:57:54 by nicky         #+#    #+#                 */
+/*   Updated: 2021/11/02 19:38:16 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "error.h"
+#include "checker.h"
 
-void	ft_close(error_msg message, int err, t_all *all)
+void	ft_close(error_msg message, int err)
 {
+	err = 0;
 	print_error(message);
-	free_stack_array(all, err);
 	exit(0);
 }
 
-void	print_error(error_msg msg)
+void	print_error(error_msg message)
 {
-	if (msg == MALLOC_FAILED)
+	if (message == MALLOC_FAILED)
 		ft_putendl_fd("ERROR\nMalloc allocation failed", 2);
-	if (msg == INTEGER_OVERFLOW)
+	if (message == INTEGER_OVERFLOW)
 		ft_putendl_fd("ERROR\nInteger exceeds limits", 2);
-	if (msg == STACK_ALLOCATION_FAIL)
+	if (message == STACK_ALLOCATION_FAIL)
 		ft_putendl_fd("ERROR\nArguments can only be integers", 2);
-	if (msg == DOUBLE_INTEGER)
+	if (message == DOUBLE_INTEGER)
 		ft_putendl_fd("ERROR\nDouble integer in stack", 2);
-}
-
-void	free_stack_array(t_all *all, int err)
-{
-	if (err > 2)
-	{
-		free(all->stack_a.num_stack);
-		free(all->stack_b.num_stack);
-	}
-	if (err > 6)
-		free(all->copy_a.num_stack);
-	if (err > 7)
-		free(all->enum_a.num_stack);
+	if (message == UNKOWN_EXCUTION_INPUT)
+		ft_putendl_fd("ERROR\nUnknown execution input", 2);
+	if (message == KO)
+		ft_putendl_fd("KO", 1);
+	if (message == SUCCES)
+		ft_putendl_fd("OK", 1);
 }
