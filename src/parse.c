@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:03:48 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/02 22:52:44 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/04 17:07:01 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ void	init_and_sort_copy_stack(t_stack *copy_a, t_stack *stack_a, t_all *all)
 
 void	pre_sort(t_all *all)
 {
-	sort(&all->enum_a, &all->stack_b);
+	if (all->enum_a.top == 3)
+		sort_three(&all->enum_a);
+	else if (all->enum_a.top == 5)
+		sort_five(&all->enum_a, &all->stack_b);
+	else
+		sort_redix(&all->enum_a, &all->stack_b);
 }
 
 void	initialize(int argc, char **argv)
@@ -54,6 +59,8 @@ void	initialize(int argc, char **argv)
 		ft_close(DOUBLE_INTEGER, 5, &all);
 	init_and_sort_copy_stack(&all.copy_a, &all.stack_a, &all);
 	all.enum_a = copy_and_enum(&all.stack_a, &all.copy_a, &all);
+	if (is_sorted(&all.enum_a))
+		ft_close(SUCCES, 99, &all);
 	pre_sort(&all);
 	ft_close(SUCCES, 99, &all);
 }

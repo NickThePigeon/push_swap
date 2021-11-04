@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:37:00 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/02 00:27:28 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/04 13:21:01 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ void	init_stacks(t_stack *stack_a, t_stack *stack_b, int len, t_all *all);
 
 void	bubble_sort(int *arr, int n);
 void	swap_point(int *xp, int *yp);
-void	sort(t_stack *stack_a, t_stack *stack_b);
+void	sort_redix(t_stack *stack_a, t_stack *stack_b);
+void	sort_three(t_stack *stack_a);
+void	sort_five(t_stack *stack_a, t_stack *stack_b);
 void	pre_sort(t_all *all);
 
 void	ft_close(error_msg message, int err, t_all *all);

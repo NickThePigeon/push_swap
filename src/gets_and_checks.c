@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 00:25:16 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/02 00:29:26 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/03 17:31:26 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	get_arguments(char **args,	int argc, t_stack *stack)
 	j = 0;
 	while (len > 0)
 	{
+		if (!args[len][0])
+			return (0);
 		while (args[len][j])
 		{
 			if (args[len][0] == '-')

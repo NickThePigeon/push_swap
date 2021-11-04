@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:36:44 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/01 23:12:55 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/04 12:29:56 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	main(int argc, char **argv)
 		initialize(argc, argv);
 	}
 	else
-		return (-1);
+	{
+		ft_putendl_fd("ERROR", 2);
+	}
 	return (0);
 }
