@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 13:57:54 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/02 19:38:16 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/05 14:42:43 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	ft_close(error_msg message, int err)
 
 void	print_error(error_msg message)
 {
+	if (message == NO_ARGUMENTS)
+		ft_putendl_fd("ERROR\nNo arguments given", 2);
 	if (message == MALLOC_FAILED)
 		ft_putendl_fd("ERROR\nMalloc allocation failed", 2);
 	if (message == INTEGER_OVERFLOW)

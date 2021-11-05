@@ -6,14 +6,14 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 10:15:28 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/02 22:52:06 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/05 15:35:16 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHECKER_H
 #define CHECKER_H
 
-#include "../libft/libft.h"
+#include "../../libft/libft.h"
 #include <stdio.h>
 #include "error.h"
 

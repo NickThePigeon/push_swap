@@ -6,14 +6,14 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/06/03 14:37:00 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/04 13:21:01 by nduijf        ########   odam.nl         */
+/*   Updated: 2021/11/05 14:55:33 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 #define PUSH_SWAP_H
 
-#include "libft/libft.h"
+#include "../libft/libft.h"
 #include "error.h"
 #include <unistd.h>
 #include <stdio.h>

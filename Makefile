@@ -1,27 +1,26 @@
 NAME =			push_swap
-SRCS = 			src/push_swap.c \
-				src/parse.c		\
-				src/push.c		\
-				src/swap.c		\
-				src/r_rotate.c	\
-				src/rotate.c	\
-				src/algorithms.c	\
-				src/utils.c		\
-				src/exit.c		\
-				src/gets_and_checks.c	\
-
+VPATH =			./src/
+SRCS = 			push_swap.c \
+				parse.c		\
+				push.c		\
+				swap.c		\
+				r_rotate.c	\
+				rotate.c	\
+				algorithms.c	\
+				utils.c		\
+				exit.c		\
+				gets_and_checks.c	\
 
 OBJS			= $(SRCS:.c=.o)
-
-HEADER_FILE		= push_swap.h
-CFLAGS			= -O3 -Wall -Wextra -Werror -I.
+INCL_DIR		= ./include/
+CFLAGS			= -O3 -Wall -Wextra -Werror -I$(INCL_DIR)
 LIBFT			= libft/libft.a
 CC				= gcc
 
 all:	$(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS} ${LIBFT}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
 
 $(LIBFT):
 	make -C libft

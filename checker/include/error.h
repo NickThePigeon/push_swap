@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 13:56:53 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/03 13:50:42 by nduijf        ########   odam.nl         */
+/*   Updated: 2021/11/05 14:09:34 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 typedef enum
 {
+	NO_ARGUMENTS,
 	MALLOC_FAILED,
 	STACK_ALLOCATION_FAIL,
 	INTEGER_OVERFLOW,

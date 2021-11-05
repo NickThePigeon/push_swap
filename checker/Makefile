@@ -1,4 +1,5 @@
 NAME =			checker
+VPATH =			./src/
 SRCS = 			checker.c	\
 				push.c		\
 				swap.c		\
@@ -13,21 +14,22 @@ SRCS = 			checker.c	\
 
 OBJS			= $(SRCS:.c=.o)
 
-HEADER_FILE		= checker.h
-CFLAGS			= -O3 -Wall -Wextra -Werror -I.
+INCL_DIR		= ./include/
+CFLAGS			= -O3 -Wall -Wextra -Werror -I$(INCL_DIR)
+LIBFT_DIR		= ../libft
 LIBFT			= ../libft/libft.a
 CC				= gcc
 
 all:	$(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS} ${LIBFT}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
 
 $(LIBFT):
-	make -C ../libft
+	make -C $(LIBFT_DIR)
 
 clean:
-	make clean -C ../libft
+	make clean -C $(LIBFT_DIR)
 	rm -f $(OBJS)
 
 fclean:	clean

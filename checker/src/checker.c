@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 10:15:09 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/02 23:18:54 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/05 14:43:44 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	init_stack(t_stack *stack_a, t_stack *stack_b, int len)
 {
+	if (len == 0)
+		ft_close(NO_ARGUMENTS, 1);
 	stack_a->top = 0;
 	stack_b->top = 0;
 	stack_a->array = (int *)malloc(sizeof(int) * len);
@@ -138,12 +140,10 @@ int	main(int argc, char **argv)
 		free_both_stacks(&stack_a, &stack_b);
 		ft_close(UNKOWN_EXCUTION_INPUT, 5);
 	}
-	print_stack(&stack_a);
 	error = is_sorted(&stack_a, &stack_b);
 	free_both_stacks(&stack_a, &stack_b);
-	if (error == 1)
-		ft_close(SUCCES, 99);
-	else
+	if (error == 0)
 		ft_close(KO, 6);
+	ft_close(SUCCES, 99);
 	return (0);
 }
