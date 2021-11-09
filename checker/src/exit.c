@@ -6,15 +6,14 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 13:57:54 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/05 21:30:58 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/09 13:25:17 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_close(t_error_msg message, int err)
+void	ft_close(t_error_msg message)
 {
-	err = 0;
 	print_error(message);
 	exit(0);
 }
