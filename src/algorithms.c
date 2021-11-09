@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/10/31 18:01:54 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/04 19:01:25 by nduijf        ########   odam.nl         */
+/*   Updated: 2021/11/05 21:24:42 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,35 +48,52 @@ void	sort_three(t_stack *stack_a)
 		r_rotate_a(stack_a);
 }
 
-void	sort_five(t_stack *stack_a, t_stack *stack_b)
+void	sort_last_two(t_stack *stack_a, t_stack *stack_b)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (i == 0)
+	while (i < 2)
 	{
-		if (stack_a->num_stack[stack_a->top - 1] == 0)
+		if (stack_b->num_stack[stack_b->top - 1] > stack_a->num_stack[0])
 		{
-			push_to_b(stack_a, stack_b);
-			i = 1;
-		}
-		else
+			push_to_a(stack_a, stack_b);
 			rotate_a(stack_a);
-	}
-	i = 0;
-	while (i == 0)
-	{
-		if (stack_a->num_stack[stack_a->top - 1] == 1)
+		}
+		else if (stack_b->num_stack[stack_b->top - 1] > stack_a->num_stack[stack_a->top - 1]
+			&& stack_b->num_stack[stack_b->top - 1] < stack_a->num_stack[stack_a->top - 2])
 		{
-			push_to_b(stack_a, stack_b);
-			i = 1;
+			push_to_a(stack_a, stack_b);
+			swap_a(stack_a);
 		}
-		else
+		else if (stack_b->num_stack[stack_b->top - 1] < stack_a->num_stack[stack_a->top - 1])
+			push_to_a(stack_a, stack_b);
+		else if (stack_b->num_stack[stack_b->top - 1] < stack_a->num_stack[0]
+			&& stack_b->num_stack[stack_b->top - 1] > stack_a->num_stack[1])
+		{
+			r_rotate_a(stack_a);
+			push_to_a(stack_a, stack_b);
 			rotate_a(stack_a);
+			rotate_a(stack_a);
+		}
+		else if (stack_b->num_stack[stack_b->top - 1] > stack_a->num_stack[stack_a->top - 2]
+			&& stack_b->num_stack[stack_b->top - 1] < stack_a->num_stack[stack_a->top - 3])
+		{
+			rotate_a(stack_a);
+			push_to_a(stack_a, stack_b);
+			swap_a(stack_a);
+			r_rotate_a(stack_a);
+		}
+		i++;
 	}
+}
+
+void	sort_five(t_stack *stack_a, t_stack *stack_b)
+{
+	push_to_b(stack_a, stack_b);
+	push_to_b(stack_a, stack_b);
 	sort_three(stack_a);
-	push_to_a(stack_a, stack_b);
-	push_to_a(stack_a, stack_b);
+	sort_last_two(stack_a, stack_b);
 }
 
 void	sort_redix(t_stack *stack_a, t_stack *stack_b)

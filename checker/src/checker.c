@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 10:15:09 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/05 14:43:44 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/05 21:28:53 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	init_stack(t_stack *stack_a, t_stack *stack_b, int len)
 
 void	free_both_stacks(t_stack *stack_a, t_stack *stack_b)
 {
-		free(stack_a->array);
-		free(stack_b->array);
+	free(stack_a->array);
+	free(stack_b->array);
 }
 
 void	check_and_get(t_stack *stack_a, t_stack *stack_b, char **argv, int argc)
@@ -82,11 +82,11 @@ int	check_operations(t_stack *stack_a, t_stack *stack_b, char *input)
 	return (1);
 }
 
-int is_sorted(t_stack *stack_a, t_stack *stack_b)
+int	is_sorted(t_stack *stack_a, t_stack *stack_b)
 {
-	int holder;
-	int len;
-	
+	int	holder;
+	int	len;
+
 	if (stack_b->top != 0)
 		return (0);
 	len = stack_a->top - 1;

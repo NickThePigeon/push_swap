@@ -6,20 +6,20 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 13:57:54 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/05 14:42:43 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/05 21:30:58 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_close(error_msg message, int err)
+void	ft_close(t_error_msg message, int err)
 {
 	err = 0;
 	print_error(message);
 	exit(0);
 }
 
-void	print_error(error_msg message)
+void	print_error(t_error_msg message)
 {
 	if (message == NO_ARGUMENTS)
 		ft_putendl_fd("ERROR\nNo arguments given", 2);

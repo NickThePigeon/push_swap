@@ -6,14 +6,14 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 13:56:53 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/05 14:09:34 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/05 21:30:41 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
-#define ERROR_H
+# define ERROR_H
 
-typedef enum
+typedef enum e_error_msg
 {
 	NO_ARGUMENTS,
 	MALLOC_FAILED,
@@ -23,6 +23,6 @@ typedef enum
 	UNKOWN_EXCUTION_INPUT,
 	KO,
 	SUCCES,
-}	error_msg;
+}	t_error_msg;
 
 #endif

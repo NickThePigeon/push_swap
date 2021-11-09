@@ -11,8 +11,9 @@ SRCS = 			push_swap.c \
 				exit.c		\
 				gets_and_checks.c	\
 
-OBJS			= $(SRCS:.c=.o)
+
 INCL_DIR		= ./include/
+OBJS			= $(SRCS:.c=.o)
 CFLAGS			= -O3 -Wall -Wextra -Werror -I$(INCL_DIR)
 LIBFT			= libft/libft.a
 CC				= gcc

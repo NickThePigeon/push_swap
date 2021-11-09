@@ -6,21 +6,21 @@
 /*   By: nduijf <nduijf@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/01 18:22:31 by nduijf        #+#    #+#                 */
-/*   Updated: 2021/11/02 10:18:39 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/05 21:38:18 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "error.h"
 
-void	ft_close(error_msg message, int err, t_all *all)
+void	ft_close(t_error_msg message, int err, t_all *all)
 {
 	print_error(message);
 	free_stack_array(all, err);
 	exit(0);
 }
 
-void	print_error(error_msg msg)
+void	print_error(t_error_msg msg)
 {
 	if (msg == MALLOC_FAILED)
 		ft_putendl_fd("ERROR\nMalloc allocation failed", 2);
