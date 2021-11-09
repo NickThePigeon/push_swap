@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 10:15:28 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/05 21:34:04 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/09 13:15:31 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		r_rotate_rr(t_stack *stack_a, t_stack *stack_b);
 int		r_rotate(t_stack *stack);
 
 /* getting and checking functions */
+int		is_sorted(t_stack *stack_a, t_stack *stack_b);
 void	check_and_get(t_stack *stack_a,
 			t_stack *stack_b, char **argv, int argc);
 int		check_doubles(t_stack *stack);

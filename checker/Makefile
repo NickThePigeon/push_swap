@@ -7,6 +7,7 @@ SRCS = 			checker.c	\
 				r_rotate.c	\
 				gets_and_checks.c \
 				exit.c		\
+				utils.c		\
 				gnl/get_next_line.c	\
 				gnl/get_next_line_utils.c	\
 
