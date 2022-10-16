@@ -5,6 +5,6 @@ example
 
 ![alt text](https://github.com/NickThePigeon/push_swap/blob/master/push_swap_example.png?raw=true)
 
-I made also the bonus assignment with the checker
+I made also the bonus assignment which is a checker to see if the outcome of push_swap is correct
 
 ![alt text](https://github.com/NickThePigeon/push_swap/blob/master/push_swap_checker_preview.png?raw=true)
