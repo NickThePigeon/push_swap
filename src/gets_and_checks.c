@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 00:25:16 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/09 12:25:30 by nduijf        ########   odam.nl         */
+/*   Updated: 2022/10/16 17:08:06 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	check_overflow(char **argv, t_stack *stack)
 	while (argv[i])
 	{
 		ret_itoa = ft_itoa(stack->num_stack[len]);
-		if (ft_strcmp(argv[i], ret_itoa))
+		if (ft_strncmp(argv[i], ret_itoa, ft_strlen(ret_itoa)))
 			return (0);
 		if (ret_itoa)
 			free(ret_itoa);

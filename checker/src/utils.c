@@ -6,7 +6,7 @@
 /*   By: nduijf <nduijf@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/09 13:13:01 by nduijf        #+#    #+#                 */
-/*   Updated: 2021/11/09 13:14:35 by nduijf        ########   odam.nl         */
+/*   Updated: 2022/10/16 17:11:51 by nicky         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	print_stack(t_stack *stack)
 {
-	int	i;
 	int	size;
 
 	size = stack->top;
-	i = 0;
 	while (size > 0)
 	{
 		printf("%d ", stack->array[size - 1]);
