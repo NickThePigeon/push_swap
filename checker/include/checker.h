@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 10:15:28 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/05 21:34:04 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/09 14:17:18 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include "../../libft/libft.h"
 # include <stdio.h>
 # include "error.h"
+
+#define A 0
+#define B 1
 
 typedef struct s_stack
 {
@@ -44,6 +47,7 @@ int		r_rotate_rr(t_stack *stack_a, t_stack *stack_b);
 int		r_rotate(t_stack *stack);
 
 /* getting and checking functions */
+int		is_sorted(t_stack *stack_a, t_stack *stack_b);
 void	check_and_get(t_stack *stack_a,
 			t_stack *stack_b, char **argv, int argc);
 int		check_doubles(t_stack *stack);
@@ -52,7 +56,7 @@ int		check_overflow(char **argv, t_stack *stack);
 int		check_operations(t_stack *stack_a, t_stack *stack_b, char *input);
 
 /* exit functions */
-void	ft_close(t_error_msg message, int err);
+void	ft_close(t_error_msg message);
 void	print_error(t_error_msg message);
 int		get_next_line(int fd, char **line);
 

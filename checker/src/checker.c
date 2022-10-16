@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/02 10:15:09 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/05 21:28:53 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/09 14:19:16 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	init_stack(t_stack *stack_a, t_stack *stack_b, int len)
 {
 	if (len == 0)
-		ft_close(NO_ARGUMENTS, 1);
+		ft_close(NO_ARGUMENTS);
 	stack_a->top = 0;
 	stack_b->top = 0;
 	stack_a->array = (int *)malloc(sizeof(int) * len);
 	if (!stack_a->array)
-		ft_close(MALLOC_FAILED, 1);
+		ft_close(MALLOC_FAILED);
 	stack_b->array = (int *)malloc(sizeof(int) * len);
 	if (!stack_b->array)
 	{
 		free(stack_a->array);
-		ft_close(MALLOC_FAILED, 1);
+		ft_close(MALLOC_FAILED);
 	}
 }
 
@@ -40,16 +40,16 @@ void	check_and_get(t_stack *stack_a, t_stack *stack_b, char **argv, int argc)
 	if (get_arguments(argv, argc, stack_a) == 0)
 	{
 		free_both_stacks(stack_a, stack_b);
-		ft_close(STACK_ALLOCATION_FAIL, 2);
+		ft_close(STACK_ALLOCATION_FAIL);
 	}
 	if (check_doubles(stack_a) == 0)
 	{
-		ft_close(DOUBLE_INTEGER, 3);
+		ft_close(DOUBLE_INTEGER);
 	}
 	if (check_overflow(argv, stack_a) == 0)
 	{
 		free_both_stacks(stack_a, stack_b);
-		ft_close(INTEGER_OVERFLOW, 4);
+		ft_close(INTEGER_OVERFLOW);
 	}
 }	
 
@@ -82,68 +82,31 @@ int	check_operations(t_stack *stack_a, t_stack *stack_b, char *input)
 	return (1);
 }
 
-int	is_sorted(t_stack *stack_a, t_stack *stack_b)
-{
-	int	holder;
-	int	len;
-
-	if (stack_b->top != 0)
-		return (0);
-	len = stack_a->top - 1;
-	holder = stack_a->array[len];
-	len--;
-	while (len >= 0)
-	{
-		if (stack_a->array[len] > holder)
-		{
-			holder = stack_a->array[len];
-			len--;
-		}
-		else
-			return (0);
-	}
-	return (1);
-}
-
-void	print_stack(t_stack *stack)
-{
-	int	i;
-	int	size;
-
-	size = stack->top;
-	i = 0;
-	while (size > 0)
-	{
-		printf("%d ", stack->array[size - 1]);
-		size--;
-	}
-	printf("\n");
-}
-
 int	main(int argc, char **argv)
 {
-	t_stack	stack_a;
-	t_stack	stack_b;
+	t_stack	stack[2];
 	char	*line;
 	int		error;
 
-	init_stack(&stack_a, &stack_b, (argc - 1));
-	check_and_get(&stack_a, &stack_b, argv, argc);
+	if (argc == 1)
+		return (0);
+	init_stack(&stack[A], &stack[B], (argc - 1));
+	check_and_get(&stack[A], &stack[B], argv, argc);
 	error = 1;
 	while (get_next_line(0, &line) && error > 0)
 	{
-		error = check_operations(&stack_a, &stack_b, line);
+		error = check_operations(&stack[A], &stack[B], line);
 		free(line);
 	}
 	if (error == 0)
 	{
-		free_both_stacks(&stack_a, &stack_b);
-		ft_close(UNKOWN_EXCUTION_INPUT, 5);
+		free_both_stacks(&stack[A], &stack[B]);
+		ft_close(UNKOWN_EXCUTION_INPUT);
 	}
-	error = is_sorted(&stack_a, &stack_b);
-	free_both_stacks(&stack_a, &stack_b);
+	error = is_sorted(&stack[A], &stack[B]);
+	free_both_stacks(&stack[A], &stack[B]);
 	if (error == 0)
-		ft_close(KO, 6);
-	ft_close(SUCCES, 99);
+		ft_close(KO);
+	ft_close(SUCCES);
 	return (0);
 }

@@ -6,10 +6,12 @@ SRCS = 			push_swap.c \
 				swap.c		\
 				r_rotate.c	\
 				rotate.c	\
-				algorithms.c	\
+				redix_sort.c	\
 				utils.c		\
 				exit.c		\
 				gets_and_checks.c	\
+				bubble_sort.c	\
+				sort_small.c	\
 
 
 INCL_DIR		= ./include/

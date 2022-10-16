@@ -6,7 +6,7 @@
 /*   By: nicky <nicky@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/11/01 22:24:39 by nicky         #+#    #+#                 */
-/*   Updated: 2021/11/02 00:35:21 by nicky         ########   odam.nl         */
+/*   Updated: 2021/11/09 12:40:20 by nduijf        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ int	is_sorted(t_stack *stack)
 			return (0);
 	}
 	return (1);
+}
+
+int	small_sorted(t_stack *stack_a)
+{
+	if (stack_a->num_stack[stack_a->top - 3]
+		> stack_a->num_stack[stack_a->top - 2]
+		&& stack_a->num_stack[stack_a->top - 2]
+		> stack_a->num_stack[stack_a->top - 1])
+		return (1);
+	else
+		return (0);
 }
 
 int	is_empty(t_stack *stack)
